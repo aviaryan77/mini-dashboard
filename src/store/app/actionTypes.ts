@@ -1,0 +1,6 @@
+
+
+export const RESET_APP_DATA = 'RESET_APP_DATA';
+export const RESET_APP_DATA_SUCCESS = 'RESET_APP_DATA_SUCCESS';
+
+export const APP_API_ERROR = 'APP_API_ERROR';
