@@ -28,4 +28,5 @@ export const colors = {
     red: '#BD3D3D',
     placeholder: '#D9D9D9',
   },
+  error: '#BD3D3D',
 };

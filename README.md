@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mini Dashboard
 
-## Getting Started
+## 📌 Features
 
-First, run the development server:
+- 🔐 **Authentication**: Mock-based user authentication.
+- 📊 **Analytics Dashboard**: Dynamic charts and reports using Chart.js.
+- 🎨 **Dark/Light Theme**: Toggle between light and dark mode.
+- 🏠 **Sidebar Navigation**: Smooth navigation experience.
+- ⚡ **Optimized Performance**: Efficient state management with Redux-Saga.
+- 🚀 **Responsive UI**: Fully mobile-friendly and accessible.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## How to Run the Project Locally
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/mini-dashboard.git
+   cd mini-dashboard
+   ```
+
+2. **Install dependencies:**
+   ```sh
+   yarn
+   ```
+
+3. **Start the development server:**
+   ```sh
+   yarn dev
+   ```
+
+4. **Open your browser and navigate to:**
+   ```
+   http://localhost:3000
+   ```
+
+## 🛠️ Technologies Used
+
+- **Next.js 15**: React framework for server-side rendering and static site generation.
+- **Redux & Redux-Saga**: State management with middleware for handling side effects.
+- **Chakra UI & Tailwind CSS**: Component-based styling with utility-first CSS.
+- **Formik & Yup**: Form handling with schema validation.
+- **Chart.js**: Data visualization library for analytics and reports.
+- **React-Error-Boundary**: Graceful error handling for components.
+- **Framer Motion**: Animations and transitions.
+
+
+
+## 📂 Folder Structure
+
+```
+/mini-dashboard
+ ├── /components     # Reusable UI components
+ ├── /app            # Next.js pages
+ ├── /store          # Redux store and sagas
+ ├── /styles         # Global styles and themes
+ ├── /public         # Static assets
+ ├── /helpers        # Helper functions
+ ├── /types          # TypeScript Types
+ ├── README.md       # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

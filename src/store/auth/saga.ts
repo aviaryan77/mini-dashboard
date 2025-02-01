@@ -1,11 +1,19 @@
 // Auth Redux States
 import { takeEvery, fork, put, all, call, select } from 'redux-saga/effects';
-import { SEND_OTP, LOGIN, REFRESH_TOKEN, LOGOUT } from './actionTypes';
+import { SEND_OTP, LOGIN, REFRESH_TOKEN, 
+    //PROFILE
+    GET_PROFILE,
+    UPDATE_PROFILE,
+
+  
+  LOGOUT } from './actionTypes';
 
 import {
   sendOtpSuccess,
   loginSuccess,
   refreshTokenSuccess,
+  getProfileSuccess,
+  updateProfileSuccess,
   logoutSuccess,
   authError,
 } from './actions';
@@ -14,11 +22,18 @@ import {
   sendOtpApi,
   loginApi,
   refreshTokenApi,
+
+  updateProfileApi,
 } from '@/helpers/Api';
 
 import { SagaPayloadType } from '@/types/Types';
 import { toast } from '@/helpers/Toast';
-import Log from '@/helpers/Log';
+
+import store from '@/store';
+
+
+
+
 
 // SEND_OTP
 function* sendOtp({
@@ -67,6 +82,11 @@ function* login({
     if (response?.status === 200 || response?.status === 201) {
       yield put(loginSuccess(response?.data));
       callback(response?.data);
+      toast({
+        title: 'Success',
+        description: 'Login Successful',
+        status: 'success',
+      });
     } else {
       console.log('error in verify otp', response?.data);
       toast({
@@ -104,6 +124,44 @@ function* refreshToken({
   }
 }
 
+// PROFILE
+function* getProfile({
+  payload: { data, callback = () => {} },
+}: SagaPayloadType): Generator<any, void, any> {
+  try {
+    const state = store.getState();
+
+      yield put(getProfileSuccess( state.auth.user));
+      callback( state.auth.user);
+    
+  } catch (error) {
+    yield put(authError(error));
+  }
+}
+
+function* updateProfile({
+  payload: { data, callback = () => {} },
+}: SagaPayloadType): Generator<any, void, any> {
+  try {
+    const response = yield call(updateProfileApi, { data });
+    if (response?.status === 200) {
+      yield put(updateProfileSuccess(response?.data));
+      callback(response?.data);
+      toast({
+        title: 'Success',
+        description: 'Profile Updated Successfully',
+        status: 'success',
+      });
+    } else {
+      yield put(authError(`error with status code : ${response.status}`));
+    }
+  } catch (error) {
+    yield put(authError(error));
+  }
+}
+
+
+
 // LOGOUT
 function* logout({
   payload: { callback = () => {} },
@@ -124,6 +182,8 @@ export function* watchAuth() {
   yield takeEvery(SEND_OTP, sendOtp);
   yield takeEvery(LOGIN, login);
   yield takeEvery(REFRESH_TOKEN, refreshToken);
+  yield takeEvery(GET_PROFILE, getProfile);
+  yield takeEvery(UPDATE_PROFILE, updateProfile);
   yield takeEvery(LOGOUT, logout);
 }
 

@@ -1,14 +1,11 @@
 'use client';
 import { Heading } from '@chakra-ui/react';
-import SalesChart from './SalesChart';
+import ProfileForm from './ProfileForm';
 
 function MyPage() {
   return (
     <div>
-      <Heading className='text-xl font-bold text-gray-800 dark:text-gray-200 mb-6'>
-        Sales Data for Last 7 Days
-      </Heading>
-      <SalesChart />
+      <ProfileForm/>
     </div>
   );
 }

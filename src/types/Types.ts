@@ -21,3 +21,11 @@ export interface SagaPayloadType {
   payload: PayloadType;
   type: string;
 }
+export interface UserType {
+  _id?: string;
+  email: string;
+  name?: string;
+  phone?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}

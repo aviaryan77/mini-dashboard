@@ -13,7 +13,7 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    accessToken? router.push('/dashboard'): router.push('/login');
+    accessToken? router.push('/app'): router.push('/login');
   }, [router]);
 
   return (

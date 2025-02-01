@@ -3,12 +3,21 @@ import { useTheme } from 'next-themes';
 
 import { Avatar, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { CN_Link } from './theme';
+import { useAppDispatch } from '@/store/ReduxHook';
+import { logout } from '@/store/actions';
+import { clearStore } from '@/store/reducers';
 
 const Sidebar = () => {
   const { theme, setTheme } = useTheme();
+  const dispatch= useAppDispatch();
+  
 
   const onLogout = () => {
-    //
+  dispatch(logout({ callback: () =>{
+    dispatch(clearStore());
+
+    // router.push('/login') 
+  }}));
   };
 
   const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
@@ -16,7 +25,6 @@ const Sidebar = () => {
     <div>
       <div className='items-center justify-center w-32 h-32 mx-auto overflow-hidden rounded-full'>
         <Avatar
-          src='/images/profile.jpg'
           size='xl'
           className='w-32 h-32 mx-auto overflow-hidden rounded-full'
         />
@@ -30,7 +38,7 @@ const Sidebar = () => {
           Home
         </CN_Link>
         <CN_Link
-          href='/dashboard'
+          href='/analytics'
           className='w-8/12 px-5 py-2 my-3 rounded-full bg-gradient-to-r from-green-400 to-blue-400 justify-center'
         >
           Analytics

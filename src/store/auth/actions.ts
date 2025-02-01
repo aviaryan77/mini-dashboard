@@ -1,4 +1,3 @@
-import Log from '@/helpers/Log';
 import {
   SEND_OTP,
   SEND_OTP_SUCCESS,
@@ -7,13 +6,17 @@ import {
   REFRESH_TOKEN,
   REFRESH_TOKEN_SUCCESS,
 
-  // LOGOUT
+  //PROFILE
+  GET_PROFILE,
+  GET_PROFILE_SUCCESS,
+  UPDATE_PROFILE,
+  UPDATE_PROFILE_SUCCESS,
   LOGOUT,
   LOGOUT_SUCCESS,
   AUTH_ERROR,
 } from './actionTypes';
 
-import { PayloadType } from '@/types/Types';
+import { PayloadType, UserType } from '@/types/Types';
 
 export const sendOtp = (
   data: PayloadType<{ phone?: string } | { email?: string }>
@@ -56,6 +59,35 @@ export const refreshTokenSuccess = (data: string) => {
   };
 };
 
+// PROFILE
+export const getProfile = (data: PayloadType) => {
+  return {
+    type: GET_PROFILE,
+    payload: data,
+  };
+};
+
+export const getProfileSuccess = (data: PayloadType) => {
+  return {
+    type: GET_PROFILE_SUCCESS,
+    payload: data,
+  };
+};
+
+export const updateProfile = (data: PayloadType) => {
+  return {
+    type: UPDATE_PROFILE,
+    payload: data,
+  };
+};
+
+export const updateProfileSuccess = (data: PayloadType) => {
+  return {
+    type: UPDATE_PROFILE_SUCCESS,
+    payload: data,
+  };
+};
+
 // LOGOUT
 export const logout = (data: PayloadType) => {
   return {
@@ -85,14 +117,21 @@ export type AuthActionType =
   | {
       type: typeof LOGIN_SUCCESS;
       payload: {
-        accessToken?: string; // only when added organisation
-        message?: string;
-        teacherId: string;
-        organisationId?: string; // only when added organisation
+        accessToken?: string;
+        user: UserType;
       };
     }
   | { type: typeof REFRESH_TOKEN; payload: PayloadType }
   | { type: typeof REFRESH_TOKEN_SUCCESS; payload: any }
+  | { type: typeof GET_PROFILE; payload: PayloadType }
+  | { type: typeof GET_PROFILE_SUCCESS; payload: PayloadType }
+  | { type: typeof UPDATE_PROFILE; payload: PayloadType }
+  | {
+      type: typeof UPDATE_PROFILE_SUCCESS;
+      payload: {
+        user: UserType;
+      };
+    }
   | { type: typeof LOGOUT; payload: PayloadType }
   | { type: typeof LOGOUT_SUCCESS; payload: PayloadType }
   | { type: typeof AUTH_ERROR; payload: PayloadType };

@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import Sidebar from '@/components/Sidebar';
 import { Heading } from '@chakra-ui/react';
 import { FC } from 'react';
+import ProtectedRoute from '../ProtectedRoute';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -14,8 +15,8 @@ const PageLayout: FC<PageLayoutProps> = ({ children }) => {
       <div className='h-full col-span-12 p-4 text-base text-center bg-white dark:bg-dark-500 lg:col-span-3 rounded-2xl shadow-custom-light dark:shadow-custom-dark'>
         <Sidebar />
       </div>
-      <div className='px-8 flex flex-col col-span-12 overflow-hidden bg-white dark:bg-dark-500 lg:col-span-9 rounded-2xl shadow-custom-light dark:shadow-custom-dark  justify-center'>
-        {children}
+      <div className='flex flex-col col-span-12 overflow-hidden bg-white dark:bg-dark-500 lg:col-span-9 rounded-2xl shadow-custom-light dark:shadow-custom-dark  justify-center'>
+        <ProtectedRoute>{children}</ProtectedRoute>
       </div>
     </div>
   );

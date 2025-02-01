@@ -6,6 +6,12 @@ import {
   REFRESH_TOKEN,
   REFRESH_TOKEN_SUCCESS,
 
+  //PROFILE
+  GET_PROFILE,
+  GET_PROFILE_SUCCESS,
+  UPDATE_PROFILE,
+  UPDATE_PROFILE_SUCCESS,
+
   // LOGOUT
   LOGOUT,
   LOGOUT_SUCCESS,
@@ -21,7 +27,8 @@ interface AuthState {
   refreshToken?: string | null;
   refreshTokenLoading: boolean;
   sendOtpLoading: boolean;
-  user ?: any;
+  updateProfileLoading: boolean;
+  user?: any;
   error: any;
 }
 
@@ -34,6 +41,7 @@ const initialState: AuthState = {
   user: null,
   sendOtpLoading: false,
   logoutLoading: false,
+  updateProfileLoading: false,
   error: null,
 };
 
@@ -65,7 +73,8 @@ const authReducer = (state = initialState, action: AuthActionType) => {
         ...state,
         loginLoading: false,
         accessToken: action.payload?.accessToken,
-        };
+        user: action.payload?.user,
+      };
       break;
 
     case REFRESH_TOKEN:
@@ -83,7 +92,34 @@ const authReducer = (state = initialState, action: AuthActionType) => {
       };
       break;
 
-  
+    // PROFILE
+    case GET_PROFILE:
+      state = {
+        ...state,
+      };
+      break;
+
+    case GET_PROFILE_SUCCESS:
+      state = {
+        ...state,
+        user: action.payload,
+      };
+      break;
+
+    case UPDATE_PROFILE:
+      state = {
+        ...state,
+        updateProfileLoading: true,
+      };
+      break;
+
+    case UPDATE_PROFILE_SUCCESS:
+      state = {
+        ...state,
+        user: action.payload?.user,
+        updateProfileLoading: false
+      };
+      break;
 
     // LOGOUT
     case LOGOUT:
@@ -99,6 +135,7 @@ const authReducer = (state = initialState, action: AuthActionType) => {
         accessToken: '',
         refreshToken: null,
         refreshTokenLoading: false,
+        updateProfileLoading: false,
         user: null,
         logoutLoading: false,
         error: null,
@@ -109,6 +146,7 @@ const authReducer = (state = initialState, action: AuthActionType) => {
       state = {
         ...state,
         refreshTokenLoading: false,
+        updateProfileLoading: false,
         sendOtpLoading: false,
         loginLoading: false,
         logoutLoading: false,

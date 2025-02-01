@@ -17,8 +17,8 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const SalesChart = () => {
   const bgColor = useColorModeValue("white", "gray.900");
-  const textColor = useColorModeValue("#1A202C", "#E2E8F0");
-  const theme = useColorModeValue("light", "dark");
+  const textColor = 'teal';
+
 
   // Mock sales data for the last 7 days
   const data = {

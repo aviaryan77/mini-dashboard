@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import EmailForm from './EmailForm';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/ReduxHook';
+import { getProfile } from '@/store/actions';
 
 function LoginPage() {
   const dispatch = useAppDispatch();
@@ -15,14 +16,13 @@ function LoginPage() {
 
   useEffect(() => {
     if (accessToken) {
-      router.push('/');
-      // dispatch(
-      //   getProfile({
-      //     callback: (cb: any) => {
-      //       router.push('/');
-      //     },
-      //   })
-      // );
+      dispatch(
+        getProfile({
+          callback: (cb: any) => {
+            router.push('/');
+          },
+        })
+      );
     }
   }, [accessToken]);
 

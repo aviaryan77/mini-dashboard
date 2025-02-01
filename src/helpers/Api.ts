@@ -1,3 +1,4 @@
+import { UserType } from '@/types/Types';
 import request from './Request';
 
 export const sendOtpApi = ({
@@ -19,9 +20,11 @@ export const sendOtpApi = ({
   });
 };
 
-export const loginApi = ({ data }: { data: {email:string; password:string} }): Promise<any> => {
-
-
+export const loginApi = ({
+  data,
+}: {
+  data: { email: string; password: string };
+}): Promise<any> => {
   // return request({
   //   data: data,
   //   method: 'post',
@@ -32,15 +35,19 @@ export const loginApi = ({ data }: { data: {email:string; password:string} }): P
   // Hardcode mock credentials (e.g., user@example.com and password123) and validate them.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (data.email === 'user@example.com' && data.password === 'password123') {
+      if (
+        data.email === 'user@example.com' &&
+        data.password === 'password123'
+      ) {
         resolve({
           status: 200,
           data: {
-            accessToken:'1234567890',
-            user : {
-              email: 'user@example.com',
+            accessToken: '1234567890',
+            user: {
+              email: data.email,
               name: 'test name',
-            }
+              password: data.password,
+            },
           },
         });
       }
@@ -50,12 +57,36 @@ export const loginApi = ({ data }: { data: {email:string; password:string} }): P
           error: 'Invalid credentials',
         },
       });
-    }
-    , 2000);
-  }
-  );
+    }, 2000);
+  });
 };
 
+export const updateProfileApi = ({
+  data,
+}: {
+  data: UserType;
+}): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        status: 200,
+        data: {
+          user: {
+            name: data.name,
+            ...data,
+          },
+        },
+      });
+
+      reject({
+        status: 400,
+        data: {
+          error: 'Invalid User',
+        },
+      });
+    }, 2000);
+  });
+};
 
 // refreshTokenApi,
 export const refreshTokenApi = ({}): Promise<any> => {
