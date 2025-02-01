@@ -1,23 +1,25 @@
 import React from 'react';
 import { useTheme } from 'next-themes';
 
-import { Avatar, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { CN_Link } from './theme';
-import { useAppDispatch } from '@/store/ReduxHook';
 import { logout } from '@/store/actions';
 import { clearStore } from '@/store/reducers';
+import { SIDEBAR_DATA } from './SIDEBAR_DATA';
+import { Avatar, VStack } from '@chakra-ui/react';
+import { useAppDispatch } from '@/store/ReduxHook';
 
 const Sidebar = () => {
   const { theme, setTheme } = useTheme();
-  const dispatch= useAppDispatch();
-  
+  const dispatch = useAppDispatch();
 
   const onLogout = () => {
-  dispatch(logout({ callback: () =>{
-    dispatch(clearStore());
-
-    // router.push('/login') 
-  }}));
+    dispatch(
+      logout({
+        callback: () => {
+          dispatch(clearStore());
+        },
+      })
+    );
   };
 
   const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
@@ -30,25 +32,18 @@ const Sidebar = () => {
         />
       </div>
 
-      <VStack minH='64vh'>
-        <CN_Link
-          href='/app'
-          className='w-8/12 px-5 py-2 my-3 rounded-full bg-gradient-to-r from-green-400 to-blue-400 justify-center'
-        >
-          Home
-        </CN_Link>
-        <CN_Link
-          href='/analytics'
-          className='w-8/12 px-5 py-2 my-3 rounded-full bg-gradient-to-r from-green-400 to-blue-400 justify-center'
-        >
-          Analytics
-        </CN_Link>
-        <CN_Link
-          href='/profile'
-          className='w-8/12 px-5 py-2 my-3 rounded-full bg-gradient-to-r from-green-400 to-blue-400 justify-center'
-        >
-          Profile
-        </CN_Link>
+      <VStack minH={['auto', 'auto', '64vh', '64vh']}>
+        {SIDEBAR_DATA?.map((nav) => {
+          return (
+            <CN_Link
+              key={nav.title}
+              href={nav.href}
+              className='w-8/12 px-5 py-2 my-2 rounded-full bg-gradient-to-r from-green-400 to-blue-400 justify-center'
+            >
+              {nav.title}
+            </CN_Link>
+          );
+        })}
 
         <button
           onClick={changeTheme}

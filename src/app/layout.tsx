@@ -1,10 +1,8 @@
 'use client';
-import { Inter } from 'next/font/google';
 import './globals.css';
-import { ChakraProviders } from '@/components/theme';
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+import { ChakraProviders } from '@/components/theme';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,25 +21,10 @@ export default function RootLayout({
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </head>
-      <body
-        // className={fonts.roboto.className}
-        className='bg-gray-100 dark:bg-dark-400'
-      >
+      <body className='bg-gray-100 dark:bg-dark-400'>
         <StoreProvider>
           <ThemeProvider attribute='class'>
-            <ChakraProviders>
-              <AnimatePresence mode='wait'>
-                <motion.main
-                  key={usePathname()} // Ensures animations are tied to unique routes
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {children}
-                </motion.main>
-              </AnimatePresence>
-            </ChakraProviders>
+            <ChakraProviders>{children}</ChakraProviders>
           </ThemeProvider>
           <ToastContainer />
         </StoreProvider>

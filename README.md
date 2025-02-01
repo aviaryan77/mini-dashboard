@@ -66,6 +66,7 @@
 ```
 ## 🚀 Deployed URl
 
+[mini-dashboard](https://mini-dashboard-cyan.vercel.app/app)
 
 ---
 

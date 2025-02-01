@@ -27,7 +27,6 @@ const HomePage = () => {
 
   return (
     <Box bgGradient={bgGradient} p={8} flex={1}>
-      {/* Navbar */}
       <HStack justify='space-between' w='full' maxW='1200px' mx='auto' mb={8}>
         <Heading color={textColor} fontSize='2xl'>
           Brand Logo

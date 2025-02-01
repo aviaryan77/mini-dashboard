@@ -2,13 +2,14 @@
 
 import { FC, useEffect } from 'react';
 import { Button, Center, VStack, Text, Box, Code } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
+
 import Log from '@/helpers/Log';
 import FramerPage from './FramerPage';
+import { logout } from '@/store/actions';
+import { useRouter } from 'next/navigation';
+import { clearStore } from '@/store/reducers';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useAppDispatch, useAppSelector } from '@/store/ReduxHook';
-import { logout } from '@/store/actions';
-import { clearStore } from '@/store/reducers';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -66,7 +67,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({
     const errorLocation = getErrorLocation(error.stack || '');
 
     return (
-      <Center minH='100vh' bg='gray.100' px={4}>
+      <Center  bg='gray.100' px={4}>
         <VStack
           spacing={6}
           textAlign='center'
