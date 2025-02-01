@@ -13,7 +13,7 @@
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-username/mini-dashboard.git
+   git clone https://github.com/aviaryan77/mini-dashboard.git
    cd mini-dashboard
    ```
 
@@ -31,6 +31,13 @@
    ```
    http://localhost:3000
    ```
+
+5. **Login Credentials**
+   ```
+   email: user@example.com 
+   password: password123
+   ```
+
 
 ## 🛠️ Technologies Used
 
@@ -57,6 +64,7 @@
  ├── /types          # TypeScript Types
  ├── README.md       # Project documentation
 ```
+## 🚀 Deployed URl
 
 
 ---
